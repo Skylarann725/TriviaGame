@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Trivia Game</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Luckiest+Guy|Racing+Sans+One|Noto+Serif" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+</head>
+
+<body>
+    <div class="col-md-8">
+        <h1>Wicked Trivia Game</h1>
+    <div class="containerMain">
+        <div id="gameStart">
+        <div id="divAnswers">
+            <p id="results"></p>
+            <p id="CorrectAnswer"></p>
+            <p id="pic"></p>
+        </div>
+        	<p class="timeRemaining"></p>
+            <p id="questions">
+            <div id="buttonHolder">
+            <button id="button01" class="buttons"></button><!-- <p id="answer1"></p> -->
+            <button id="button02" class="buttons"></button><!-- <p id="answer2"></p> -->
+            <button id="button03" class="buttons"></button><!-- <p id="answer3"></p> -->
+            <button id="button04" class="buttons"></button><!-- <p id="answer4"></p> -->
+            </div></p>
+        </div>
+        <div id="gameComplete">
+            <p id="gameOverCorrect"><span></span></p>
+            <p id="gameOverIncorrect"><span></span></p>
+            <p id="unanswered"><span></span></p>
+        </div>
+        <p id="btnWrapper">
+            <button class="text-center btn btn-default" id="begin">START GAME</button>
+        </p>
+    </div>
+    </div>
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
+</body>
+
+</html>

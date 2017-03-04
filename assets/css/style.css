@@ -1,0 +1,75 @@
+body {
+	background-attachment: fixed;
+	background-image: url('../images/wicked.jpg');
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+h1 {
+	font-family: 'Luckiest Guy', serif;
+	text-align: center;
+	border: solid black 5px;
+	padding: 5px;
+	width: 500px;
+	height: auto;
+	margin-left: 370px;
+	margin-top: 70px;
+	color: green;
+	font-size: 50px;
+}
+
+.containerMain {
+	text-align: center;
+	border: solid black 5px;
+	padding: 5px;
+	width: 500px;
+	height: 400px;
+	margin-left: 370px;
+	background-color: white;
+	font-family: 'Noto Serif', serif;
+}
+
+#begin {
+	padding: 10px;
+	font-family: 'Noto Serif', serif;
+	font-size: 25px;
+	color: green;
+	margin-top: 135px;
+}
+
+#button01, #button02, #button03, #button04 {
+	width: 500px;
+	height: 40px;
+	font-size: 15px;
+	font-family: 'Fjalla One', sans-serif;
+	color: green;
+}
+
+.timeRemaining {
+	margin-bottom: 30px;
+	margin-top: 30px;
+	color: green;
+}
+
+#questions {
+	margin-bottom: 25px;
+	color: green;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
