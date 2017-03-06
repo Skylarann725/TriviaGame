@@ -8,68 +8,68 @@ questionsAnswers = [
         question: "In the song Dancing Through Life who has a crush on Galinda?",
             answers: ["Boq","Bic", "Fiyaro", "The Wizard"],
             correct: "Boq",
-            imgUrl: "../images/boq.jpg"
+            imgUrl: "assets/images/boq.jpg"
         },
         {
         question: "In the song 'Defying Gravity' Where should you look to find Elphaba?",
             answers: ["Munchkin Land", "Western Sky", "Eastern Sky", "Oz"],
             correct: "Western Sky",
-            imgUrl: "../images/westernsky.jpg"
+            imgUrl: "assets/images/westernsky.jpg"
         },
         {
         question: "Why does Elphaba loath Galinda at the beginning of the song 'What is this Feeling?'",
             answers: ["She is unusually and exeedingly peculiar", "She is Blonde", "She doesn't loathe her", "She is preppy"],
             correct: "She is Blonde",
-            imgUrl: "../images/blonde.jpg"
+            imgUrl: "assets/images/blonde.jpg"
         },
         {
         question: "Who is the Wicked Witch Of the West?",
             answers: ["Elphaba", "Galinda", "Nessa Rose", "Madame Morrible"],
             correct: "Elphaba",
-            imgUrl: "../images/elphaba.jpg"
+            imgUrl: "assets/images/elphaba.jpg"
         },
         {
         question: "What type of Animal is Doctor Dillamond?",
             answers: ["a Lion", "a Goat", "an Owl", "a Fox"],
             correct: "a Goat",
-            imgUrl: "../images/drdillamond.jpg"
+            imgUrl: "assets/images/drdillamond.jpg"
         },
         {
         question: "What does Elphaba turn Fiyero into?",
             answers: ["a Statue", "a Tin Man", "a Lion", "a Scarecrow"],
             correct: "a Scarecrow",
-            imgUrl: "../images/scarecrow.jpg"
+            imgUrl: "assets/images/scarecrow.jpg"
         },
         {
         question: "What word correctly completes this lyric from 'No One Mourns The Wicked'? 'Let us be glad/Let us be grateful/Let us ______ that goodness could subdue/The wicked workings of you-know-who.'",
             answers: ["be happy", "celebrate", "rejoicify", "delightify"],
             correct: "rejoicify",
-            imgUrl: "../images/rejoicify.jpg"
+            imgUrl: "assets/images/rejoicify.jpg"
         },
         {
         question: "After Galinda and Elphaba become friends, what nickname does Galinda give Elphaba?",
             answers: ["Elphie", "Elpha", "Ellie", "Effie"],
             correct: "Elphie",
-            imgUrl: "../images/elphie.jpg"
+            imgUrl: "assets/images/elphie.jpg"
         },
         {
         question: "In the song 'Dancing Through Life', Galinda gives Elphaba something that becomes part of Elphaba's stereotypical image as a joke. What is this item?",
             answers: ["a Broomstick", "a Black Hat", "a Black Dress", "a Spellbook"],
             correct: "a Black Hat",
-            imgUrl: "../images/blackhat.jpg"
+            imgUrl: "assets/images/blackhat.jpg"
         },
         {
         question: "What will Glinda and Elphaba be late for in 'One Short Day'?",
-            answers: ["Dr. Dillamond's funeral", "history class", "Wizomania", "Nessa's Birthday Party"],
+            answers: ["Dr. Dillamond's funeral", "History Class", "Wizomania", "Nessa's Birthday Party"],
             correct: "Wizomania",
-            imgUrl: "../images/wizomania.jpg"
+            imgUrl: "assets/images/wizomania.gif"
         }
         ];
 
                 
     var countTime = 30;
     var correctAnswers = 0;
-    var IncorrectAnswers = 0;
+    var incorrectAnswers = 0;
     var unansweredQuestions = 0;
     var playMusic = new Audio("./assets/");
 
@@ -86,17 +86,19 @@ function makeButtons(){
 }
 //Set a timer to answer the questions
 var intervalId;
-// var correctID;
 var timer = {
+    //start game function-after the start button is pushed
     start: function() {
         makeButtons();
-        //Use setInterval to start the count here
+        timer.count();
         intervalId = setInterval(timer.count, 1000);
 
     },
+    //stop timer function
     stop: function() {
         clearInterval(intervalId);
     },
+    //timer countdown function
     count: function() {
         $('.timeRemaining').text("Time Remaining: " + countTime);
         countTime--;
@@ -104,7 +106,7 @@ var timer = {
             timer.evaluateAnswer(false);
         }     
     },
-    
+    //check to see if answers are correct, incorrect, or unanswered and show message
     evaluateAnswer: function (answer) {
         timer.stop();
         $(".timeRemaining").text(" ");
@@ -112,8 +114,8 @@ var timer = {
         $("#questions").hide();
         $("#divAnswers").show();
         if(answer === false) {
-            $('#results').text("You've run out of time! The correct answer was " + questionsAnswers[questionCount].correct + "!" + questionsAnswers[questionCount].imgUrl);
-        
+           timer.outOfTime(); 
+           unansweredQuestions++ 
         }
         else if(answer === questionsAnswers[questionCount].correct) {
             console.log("correct");
@@ -123,10 +125,15 @@ var timer = {
         else {
             console.log("incorrect");
             timer.incorrectMessage();
-            correctAnswers--
+            incorrectAnswers++
         }
-        setTimeout(timer.nextQuestion, 3000);
+        if(questionCount > 10) {
+            timer.endOfGame();
+        } else { 
+            setTimeout(timer.nextQuestion, 3000);
+        }
     },
+    //go to the next question
     nextQuestion: function() {
         $("#divAnswers").hide();
         $("#questions").show();
@@ -136,16 +143,32 @@ var timer = {
         makeButtons();
         timer.start();
     },
+    //correct message function
     correctMessage: function() {
-        $('#results').text("Correct!" + questionsAnswers[questionCount].imgUrl);
+        $('#results').text("Correct!");
+        insertPicture();
     },
+    //incorrect message function
     incorrectMessage: function() {
         $('#results').text("Oops! Wrong Answer! The correct answer was " + questionsAnswers[questionCount].correct + "!");
+        insertPicture();
     },
+    outOfTime: function() {
+        $('#results').text("You've run out of time! The correct answer was " + questionsAnswers[questionCount].correct + "!");
+        insertPicture();
+    },
+    //show results after the game has been completed and return to start screen
     endOfGame: function() {
         //show results
+        timer.stop();
+        $(".timeRemaining").text(" ");
+        $("#buttonHolder").hide();
+        $("#questions").hide();
+        $('#gameOverCorrect').text("Correct Answers: " + correctAnswers);
+        $('#gameOverIncorrect').text("Incorrect Answers: " + incorrectAnswers);
+        $('#unanswered').text("Unanswered: " + unanswered);
         //reset variables to start game over
-    }
+    },
 };
 $('#begin').on("click", function() {
     $(this).hide();
@@ -156,5 +179,9 @@ $('.buttons').on("click", function () {
     var btnClicked = ($(this).text());
     timer.evaluateAnswer(btnClicked);
 })
+
+function insertPicture() {
+    $('#pic').html('<img src="' + questionsAnswers[questionCount].imgUrl + '" width="500px">');
+    }
 
 });

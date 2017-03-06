@@ -25,7 +25,6 @@ h1 {
 	width: 500px;
 	height: 400px;
 	margin-left: 370px;
-	background-color: white;
 	font-family: 'Noto Serif', serif;
 }
 
@@ -38,7 +37,7 @@ h1 {
 }
 
 #button01, #button02, #button03, #button04 {
-	width: 500px;
+	width: 400px;
 	height: 40px;
 	font-size: 15px;
 	font-family: 'Fjalla One', sans-serif;
@@ -56,6 +55,13 @@ h1 {
 	color: green;
 }
 
+#results {
+	color: green;
+}
+
+p {
+	font-size: 20px;
+}
 
 
 
